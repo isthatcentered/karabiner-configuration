@@ -28,11 +28,13 @@ writeToProfile(
 	],
 	{
 		"basic.to_if_held_down_threshold_milliseconds": 150,
+		"basic.to_delayed_action_delay_milliseconds": 150,
 	},
 );
 
 function mapKeyHeld(from: FromKeyCode, to: ToKeyCode) {
 	return map(from, "optionalAny")
 		.toIfAlone({ key_code: from as ToKeyCode, halt: true })
+		.toDelayedAction([], { key_code: from as ToKeyCode })
 		.toIfHeldDown(to);
 }
